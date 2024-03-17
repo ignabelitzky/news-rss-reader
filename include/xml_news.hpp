@@ -29,7 +29,7 @@ class XML_news {
         std::vector<News> news;
         std::string xmlContent;
         void initialise();  // This method is called by the constructors
-        void createXML(const std::string &url);
+        void createXML();
         void parseXML();
         void calculate_window_dimensions();
 };

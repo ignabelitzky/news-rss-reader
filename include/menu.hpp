@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <stdexcept>
+#include "../include/utils.hpp"
 
 class Menu {
     public:

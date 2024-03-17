@@ -86,10 +86,8 @@ void Menu::initialise(std::string title, std::vector<std::string> items) {
 void Menu::print_menu() {
     wclear(menuWin);
     box(menuWin, 0, 0);
-    int y = 0;
-    int x = (width - winTitle.length()) / 2; // Calculate the x position to center the text 
-    mvwprintw(menuWin, y, x, winTitle.c_str());
-    y = 2;
+    add_window_title(menuWin, winTitle);
+    int y = 2, x = 0;
     for(int i = 0; i < static_cast<int>(menuItems.size()); ++i) {
         i == selectedItem ? wattron(menuWin, A_REVERSE) : wattroff(menuWin, A_REVERSE);
         x = (width - menuItems.at(i).length()) / 2; // Calculate the x position to center the text
