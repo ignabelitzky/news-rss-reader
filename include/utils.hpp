@@ -13,6 +13,7 @@ std::string fetch_xml_content(const std::string &url);
 
 void add_window_title(WINDOW *win, const std::string &title);
 
-void add_centered_text(WINDOW *win, const std::string &text, int y);
+// Add text to a window, centered horizontally, returns the next y position
+int add_centered_text(WINDOW *win, const std::string &text, int y);
 
 #endif

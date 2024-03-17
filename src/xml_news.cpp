@@ -34,10 +34,22 @@ void XML_news::showNews()
     wrefresh(newsWin);
     wrefresh(infoWin);
     wrefresh(menuWin);
-    int option = wgetch(menuWin);
-    while (option != 'q')
-    {
-        option = wgetch(menuWin);
+    int option = wgetch(stdscr);
+    while((option = wgetch(stdscr)) != 'q') {
+        switch(option) {
+            case KEY_UP:
+                scroll(infoWin);
+                wrefresh(infoWin);
+                refresh();
+                break;
+            case KEY_DOWN:
+                wscrl(infoWin, -1);
+                wrefresh(infoWin);
+                refresh();
+                break;
+            default:
+                break;
+        }
     }
     delwin(menuWin);
     delwin(infoWin);
@@ -50,6 +62,7 @@ void XML_news::initialise()
     parseXML();
     calculate_window_dimensions();
     noecho();
+    keypad(stdscr, TRUE);
     
     newsWin = subwin(stdscr, height, width, start_y, start_x);
     box(newsWin, 0, 0);
@@ -58,15 +71,16 @@ void XML_news::initialise()
     infoWin = subwin(newsWin, height - 7, width - 4, start_y + 1, start_x + 2);
     // box(infoWin, 0, 0);
     scrollok(infoWin, TRUE);
+    int line = 1;
     for(int i = 0; i < static_cast<int>(news.size()); i++)
     {
-        add_centered_text(infoWin, "Title", i * 7 + 1);
-        add_centered_text(infoWin, news.at(i).title, i * 7 + 2);
-        add_centered_text(infoWin, "Description", i * 7 + 3);
-        add_centered_text(infoWin, news.at(i).description, i * 7 + 4);
-        add_centered_text(infoWin, "Link", i * 7 + 5);
-        add_centered_text(infoWin, news.at(i).link, i * 7 + 6);
-        add_centered_text(infoWin, " ", i * 7 + 7);
+        line = add_centered_text(infoWin, "Title", line);
+        line = add_centered_text(infoWin, news.at(i).title, line);
+        line = add_centered_text(infoWin, "Description", line);
+        line = add_centered_text(infoWin, news.at(i).description, line);
+        line = add_centered_text(infoWin, "Link", line);
+        line = add_centered_text(infoWin, news.at(i).link, line);
+        line = add_centered_text(infoWin, " ", line);
     }
 
     menuWin = subwin(newsWin, 5, width - 4, start_y + height - 6, start_x + 2);
