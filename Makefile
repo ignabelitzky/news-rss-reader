@@ -4,7 +4,7 @@ LDLIBS := -lncurses -lcurl
 
 TARGET := main
 
-SRC := src/main.cpp src/menu.cpp
+SRC := src/main.cpp src/menu.cpp src/xml_news.cpp src/utils.cpp
 OBJ := $(SRC:.cpp=.o)
 
 all: $(TARGET)

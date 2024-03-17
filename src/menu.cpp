@@ -12,7 +12,6 @@ Menu::~Menu() {
     wclear(menuWin);
     wrefresh(menuWin);
     delwin(menuWin);
-    endwin();
 }
 
 std::string Menu::show() {
@@ -70,16 +69,17 @@ int Menu::longest_menu_item() {
 }
 
 void Menu::initialise(std::string title, std::vector<std::string> items) {
-    initscr();
-    noecho();
-    curs_set(0);
-    menuItems = items;
-    selectedItem = 0;
-    winTitle = title;
-    calculate_window_dimensions();
-    menuWin = newwin(height, width, start_y, start_x);
-    keypad(menuWin, TRUE);
-    box(menuWin, 0, 0);
+    if(isendwin() == TRUE) {
+        throw std::runtime_error("Cannot create a menu after calling endwin()");
+    } else {
+        menuItems = items;
+        selectedItem = 0;
+        winTitle = title;
+        calculate_window_dimensions();
+        menuWin = newwin(height, width, start_y, start_x);
+        keypad(menuWin, TRUE);
+        box(menuWin, 0, 0);
+    }
 }
 
 void Menu::print_menu() {
