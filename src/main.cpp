@@ -22,7 +22,9 @@ int main()
     if (selection == newspapers.at(0)) // CNN
     {
         std::string url = "http://rss.cnn.com/rss/cnn_topstories.rss";
-        XML_news *news = new XML_news(url);
+        std::string title = "CNN News";
+        XML_news *news = new XML_news(title, url);
+        news->showNews();
     }
     if (selection == "Exit")
     {

@@ -77,6 +77,7 @@ void Menu::initialise(std::string title, std::vector<std::string> items) {
         winTitle = title;
         calculate_window_dimensions();
         menuWin = newwin(height, width, start_y, start_x);
+        curs_set(0);
         keypad(menuWin, TRUE);
         box(menuWin, 0, 0);
     }
