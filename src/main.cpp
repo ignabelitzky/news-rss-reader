@@ -6,9 +6,11 @@ int main()
     initscr();
     std::string title = "RSS News Reader";
     std::vector<std::string> options = {
+        "New York Times",
         "CNN",
         "Exit"};
     Menu *menu = nullptr;
+    std::string url = "", winTitle = "";
     std::string selection = "";
     try
     {
@@ -21,15 +23,21 @@ int main()
     do {
         selection = menu->show();
         if(selection == options.at(0)) {
-            std::string url = "http://rss.cnn.com/rss/cnn_topstories.rss";
-            std::string title = "CNN News";
-            XML_news *news = new XML_news(title, url);
+            url = "https://rss.nytimes.com/services/xml/rss/nyt/World.xml";
+            winTitle = "New York Times News";
+        }
+        if(selection == options.at(1)) {
+            url = "http://rss.cnn.com/rss/cnn_topstories.rss";
+            winTitle = "CNN News";
+        }
+        if(selection != options.at(2)) {
+            XML_news *news = new XML_news(winTitle, url);
             news->showNews();
             touchwin(stdscr);
             wclear(stdscr);
             refresh();
         }
-    } while (selection != options.at(1));
+    } while (selection != options.at(2));
 
     delete menu;
     endwin();

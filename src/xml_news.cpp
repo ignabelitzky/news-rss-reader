@@ -88,6 +88,7 @@ void XML_news::parseXML()
     rapidxml::xml_node<> *root = doc.first_node();
     for(rapidxml::xml_node<> *item = root->first_node("channel")->first_node("item"); item; item = item->next_sibling())
     {
+        // I got to improve this part of the code
         News n;
         n.title = item->first_node("title")->first_node()->value();
         n.link = item->first_node("link")->value();
