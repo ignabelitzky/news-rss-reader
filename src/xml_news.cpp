@@ -38,14 +38,12 @@ void XML_news::showNews()
     while((option = wgetch(stdscr)) != 'q') {
         switch(option) {
             case KEY_UP:
-                scroll(infoWin);
-                wrefresh(infoWin);
-                refresh();
-                break;
-            case KEY_DOWN:
                 wscrl(infoWin, -1);
                 wrefresh(infoWin);
-                refresh();
+                break;
+            case KEY_DOWN:
+                wscrl(infoWin, 1);
+                wrefresh(infoWin);
                 break;
             default:
                 break;
