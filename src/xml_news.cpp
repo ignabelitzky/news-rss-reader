@@ -34,7 +34,7 @@ void XML_news::showNews()
     wrefresh(newsWin);
     wrefresh(infoWin);
     wrefresh(menuWin);
-    int option = wgetch(stdscr);
+    int option = 0;
     while((option = wgetch(stdscr)) != 'q') {
         switch(option) {
             case KEY_UP:

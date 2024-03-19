@@ -41,21 +41,22 @@ void add_window_title(WINDOW *win, const std::string &title)
 
 int add_centered_text(WINDOW *win, const std::string &text, int y)
 {
+    std::string textCopy = text;
     int maxx = getmaxx(win);
-    int textLength = text.length();
+    int textLength = textCopy.length();
     if(textLength < maxx - 4) {
         int startx = (maxx - textLength) / 2;
-        mvwprintw(win, y, startx, text.c_str());
+        mvwaddstr(win, y, startx, textCopy.c_str());
         wrefresh(win);
         y++;
     } else {
         int startx = 2;
         int endx = maxx - 2;
         int textPos = 0;
-        int textLength = text.length();
+        int textLength = textCopy.length();
         while(textPos < textLength) {
-            std::string line = text.substr(textPos, endx - 4);
-            mvwprintw(win, y, startx, line.c_str());
+            std::string line = textCopy.substr(textPos, endx - 4);
+            mvwaddstr(win, y, startx, line.c_str());
             wrefresh(win);
             textPos += endx - 4;
             y++;

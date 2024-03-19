@@ -6,6 +6,7 @@
 #include <rapidxml.h>
 #include <ncurses.h>
 #include <cwchar>
+#include <algorithm>
 
 size_t write_callback(void *contents, size_t size, size_t nmemb, void *userp);
 
